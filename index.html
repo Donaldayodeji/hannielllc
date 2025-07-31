@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hanniel LLC - Elite IT Security</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Animate on Scroll (AOS) Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+
+
+
+<style>
+    :root {
+        --primary-color: #00aaff;
+        --secondary-color: #0a192f;
+        --light-secondary-color: #112240;
+        --text-color: #ccd6f6;
+        --light-text-color: #8892b0;
+        --border-radius: 8px;
+        --white-bg: #FFFFFF; /* Pure white */
+        --light-grey-bg: #F8F9FA; /* Slightly darker than white */
+        --dark-section-text-color: #333333; /* Darker text for white backgrounds */
+        --dark-section-subtitle-color: #555555; /* Darker subtitle for white backgrounds */
+    }
+
+    html {
+        scroll-behavior: smooth;
+        /* Crucial: Prevent horizontal scroll across the entire page */
+        overflow-x: hidden;
+    }
+
+    body {
+        background-color: var(--secondary-color);
+        color: var(--text-color);
+        font-family: 'Poppins', sans-serif;
+        /* Ensure no extra padding/margin on body itself */
+        margin: 0;
+        padding: 0;
+        /* Crucial: Prevent horizontal scroll from content outside body boundaries */
+        overflow-x: hidden;
+        width: 100%; /* Ensure body takes exactly 100% of viewport width */
+    }
+
+    /* --- Navigation Bar --- */
+    .navbar {
+        background-color: transparent; /* Transparent by default */
+        transition: background-color 0.3s ease;
+        z-index: 1060; /* Higher than carousel content */
+    }
+
+    .navbar.scrolled {
+        background-color: rgba(10, 25, 47, 0.95); /* Deep blue background on scroll */
+        backdrop-filter: blur(10px); /* Add blur on scroll */
+    }
+
+    .navbar-brand {
+        font-weight: 700;
+        color: #ffffff !important; /* Logo is now white */
+    }
+    
+    /* Desktop Nav Link Hover */
+    .nav-link {
+        color: var(--text-color) !important;
+        font-weight: 400;
+        position: relative;
+        padding: 0.5rem 0; /* Adjusted padding for border effect */
+        margin: 0 1rem; /* Add horizontal margin between links */
+        transition: color 0.3s ease-in-out;
+    }
+
+    /* REMOVED: .nav-link::before for the border hover effect */
+
+    .nav-link:hover, .nav-link.active {
+        color: var(--primary-color) !important; /* Only text color change on hover/active */
+    }
+
+    /* Navbar Toggler Icon */
+    .navbar-toggler {
+        border: none;
+        z-index: 1070; /* Even higher to make sure it's on top */
+        width: 40px; /* Fixed width */
+        height: 40px; /* Fixed height */
+        position: relative; /* For absolute positioning of icons */
+        display: flex; /* To center the icons */
+        align-items: center;
+        justify-content: center;
+    }
+    .navbar-toggler:focus {
+        box-shadow: none;
+    }
+
+    .navbar-toggler-icon {
+        background-image: var(--bs-navbar-toggler-icon-bg); /* Default Bootstrap burger icon */
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .navbar-toggler .close-icon {
+        display: none; /* Hidden by default */
+        font-size: 1.5rem; /* Size for the X icon */
+        color: var(--primary-color); /* Color for the X icon */
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(90deg); /* Rotate out the burger */
+        pointer-events: none; /* Disable interaction with hidden icon */
+    }
+
+    .navbar-toggler[aria-expanded="true"] .close-icon {
+        display: block; /* Show the close icon */
+        opacity: 1;
+        transform: translate(-50%, -50%) rotate(0deg); /* Ensure it's not rotated */
+    }
+
+    /* General Button Styling & Animations */
+    .btn {
+        padding: 0.75rem 2rem;
+        border-radius: var(--border-radius);
+        font-weight: 600;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Subtle initial shadow */
+    }
+
+    .btn-primary {
+        background-color: var(--primary-color);
+        color: var(--secondary-color);
+        border: 1px solid var(--primary-color);
+    }
+
+    .btn-primary:hover {
+        background-color: transparent;
+        color: var(--primary-color);
+        transform: translateY(-2px); /* Lift effect */
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3); /* Enhanced shadow on hover */
+    }
+
+    .btn-primary:active {
+        transform: translateY(0); /* Press down effect */
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Reduced shadow on click */
+    }
+
+    .btn-cta {
+        background-color: transparent;
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+    }
+
+    .btn-cta:hover {
+        background-color: var(--primary-color);
+        color: var(--secondary-color);
+        transform: translateY(-2px); /* Lift effect */
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3); /* Enhanced shadow on hover */
+    }
+
+    .btn-cta:active {
+        transform: translateY(0); /* Press down effect */
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Reduced shadow on click */
+    }
+
+    /* --- Custom Mobile Navbar (REVISED FOR WIDER RIGHT-SIDE SLIDE & HOVER) --- */
+    @media (max-width: 991.98px) {
+        /* Main Navbar Container Adjustments */
+        .navbar .container {
+            justify-content: space-between; /* Push logo left and toggler right */
+            align-items: center; /* Vertically align items */
+            padding: 0 15px; /* Add padding to contain elements */
+            width: 100%; /* Ensure container takes full width */
+            flex-wrap: nowrap; /* Prevent wrapping */
+            overflow-x: hidden; /* Important for containing elements within the navbar itself */
+        }
+
+        .navbar-brand {
+            margin-right: 0 !important;
+            font-size: 1.5rem; /* Consistent mobile logo size */
+            flex-shrink: 0; /* Prevent the logo from shrinking */
+        }
+
+        .navbar-toggler {
+            margin-left: 0 !important;
+            flex-shrink: 0; /* Prevent the toggler from shrinking */
+            width: 40px; /* Keep fixed width for consistent icon centering */
+            height: 40px; /* Keep fixed height for consistent icon centering */
+        }
+
+        /* Off-Canvas Mobile Menu (navbar-collapse) */
+        .navbar-collapse {
+            position: fixed;
+            top: 0;
+            right: 0; /* Anchored to the RIGHT side of the viewport */
+            width: 100%; /* Take full width by default */
+            max-width: 70vw; /* **Make it cover more than half the screen (70% of viewport width)** */
+            height: 100vh;
+            background-color: rgba(10, 25, 47, 0.98);
+            backdrop-filter: blur(8px);
+            z-index: 1055;
+            /* Start completely off-screen to the right by its full max-width */
+            transform: translateX(70vw); /* **Adjust this value to match max-width and slide from right** */
+            transition: transform 0.4s ease-in-out;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            border-left: 1px solid var(--primary-color); /* Border on the LEFT of the sliding menu */
+            overflow-y: auto; /* Allow scrolling for menu content */
+        }
+
+        .navbar-collapse.show {
+            transform: translateX(0); /* When shown, slide to the right edge */
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        /* Specific adjustment for very small screens if 70vw is too wide */
+        @media (max-width: 420px) { /* Adjust breakpoint if 70vw is still too large on very small screens */
+            .navbar-collapse {
+                max-width: 100vw; /* Let it take full width on very small screens */
+                transform: translateX(100vw); /* Adjust transform to 100% of its (now full) width, from right */
+            }
+            .navbar-collapse.show {
+                transform: translateX(0);
+            }
+        }
+
+        /* Mobile Menu Internal Styling */
+        .navbar-nav {
+            width: 100%;
+            margin-top: 1rem;
+        }
+        .nav-item {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+        .nav-link {
+            margin: 0;
+            padding: 0.75rem 1rem;
+            text-align: left;
+            width: 100%;
+            transition: color 0.3s ease; /* Only color transition */
+            color: var(--text-color) !important;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color) !important;
+            /* REMOVED: background-color and border-radius for mobile hover */
+        }
+        /* REMOVED: .nav-link::before for mobile links as well */
+
+        /* Mobile Navbar Logo inside the expanded menu (if you keep it) */
+        .navbar-brand-mobile {
+            font-weight: 700;
+            color: #ffffff !important;
+            font-size: 1.5rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Align to start for left-aligned menu items */
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--primary-color);
+            margin-bottom: 1rem;
+            width: 100%;
+        }
+        .navbar-brand-mobile img {
+            height: 30px;
+            margin-right: 10px;
+        }
+        .navbar-brand-mobile .fa-shield-halved {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        .about-img {
+            max-height: 350px;
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
+    /* Overlay for when mobile menu is open */
+    .navbar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 1050;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .navbar-overlay.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+
+    /* --- Hero Section with Carousel and Globe --- */
+    #hero {
+        position: relative;
+        height: 100vh;
+        overflow: hidden; /* Important for containing globe if it tries to overflow */
+        background-color: var(--secondary-color);
+    }
+
+    #globe-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0; /* Behind carousel content */
+        overflow: hidden; /* Ensure globe itself doesn't overflow */
+    }
+
+    #globe-container canvas {
+        display: block;
+    }
+
+    /* Carousel setup for correct layering */
+    #hero .carousel-inner {
+        position: absolute; /* Take carousel out of flow, layer on top of globe */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1; /* Above the globe */
+    }
+
+    /* Custom "zoom-out-fade" animation for carousel slides */
+    .carousel-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1.2s ease-in-out, transform 1.2s ease-in-out;
+        z-index: 1;
+        display: block !important;
+        transform: scale(0.9); /* Start slightly zoomed out */
+    }
+
+    .carousel-item.active {
+        opacity: 1;
+        transform: scale(1); /* Zoom to normal size */
+        z-index: 2;
+    }
+
+    /* When an item leaves (goes inactive) */
+    .carousel-item-next:not(.carousel-item-start),
+    .carousel-item-prev:not(.carousel-item-end),
+    .carousel-item.active.carousel-item-start,
+    .carousel-item.active.carousel-item-end {
+        /* These states are for Bootstrap's default slide. We override them. */
+        transform: scale(1); /* Ensure active item doesn't get transformed by Bootstrap */
+    }
+
+    /* For the incoming slide, make it start slightly zoomed out and hidden */
+    .carousel-item-next, .carousel-item-prev {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    /* Reset for the currently active item when it's about to become inactive */
+    .carousel-item.active {
+        transform: scale(1);
+        opacity: 1;
+    }
+    
+    /* When an active item starts its exit animation (becomes .carousel-item-start or .carousel-item-end) */
+    .carousel-item.active.carousel-item-start,
+    .carousel-item.active.carousel-item-end {
+        transform: scale(0.9); /* Zoom out */
+        opacity: 0;
+        z-index: 1; /* Move behind incoming slide */
+    }
+    /* End custom "zoom-out-fade" animation */
+
+
+    .carousel-caption {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.048); /* Overlay for readability */
+        display: flex;
+        align-items: center; /* Vertically center */
+        justify-content: center; /* Horizontally center */
+        text-align: center;
+        padding: 2rem;
+        width: 100%; /* Ensure it spans full width */
+        height: 100%; /* Ensure it spans full height */
+    }
+
+    .hero-content {
+        position: relative;
+        padding: 2rem;
+        color: #fff; /* Text color */
+        max-width: 900px; /* Limit width for better readability */
+    }
+
+    .hero-content h1 {
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        font-weight: 700;
+        color: #fff;
+        text-shadow: 0 0 20px rgba(0, 170, 255, 0.5);
+    }
+
+    .hero-content p {
+        font-size: clamp(1rem, 2.5vw, 1.25rem);
+        color: var(--light-text-color);
+        max-width: 700px;
+        margin: 1rem auto;
+    }
+
+    /* Carousel Indicators as Dots */
+    .carousel-indicators [data-bs-target] {
+        width: 10px; /* Width for dots */
+        height: 10px; /* Height for dots */
+        border-radius: 50%; /* Make them perfectly round */
+        background-color: rgba(255, 255, 255, 0.7); /* Lighter background for inactive dots */
+        border: none; /* Remove border */
+        opacity: 0.7; /* Slightly transparent */
+        transition: opacity 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .carousel-indicators .active {
+        background-color: var(--primary-color); /* Primary color for active dot */
+        opacity: 1;
+        transform: scale(1.2); /* Slightly larger active dot */
+    }
+
+
+    /* --- Section Styling --- */
+    .section {
+        padding: 100px 0; /* Consistent padding for all sections */
+    }
+
+    /* White background sections with appropriate text colors */
+    #services, #why-us, #contact, #strategic-focus {
+        background-color: var(--white-bg);
+        color: var(--dark-section-text-color); /* Darker text for white background */
+    }
+
+    /* Specific background for Core Solutions */
+    #core-solutions {
+        background-color: var(--light-grey-bg);
+        color: var(--dark-section-text-color);
+    }
+    
+    #strategic-focus {
+        background-color: var(--light-grey-bg); /* Changed to light grey */
+        color: var(--dark-section-text-color);
+    }
+
+    #services .section-title,
+    #why-us .section-title,
+    #contact .section-title,
+    #core-solutions .section-title,
+    #strategic-focus .section-title {
+        color: var(--dark-section-text-color); /* Darker title for white/light grey background */
+    }
+    
+    #services .section-subtitle,
+    #why-us .section-subtitle,
+    #contact .section-subtitle,
+    #core-solutions .section-subtitle,
+    #strategic-focus .section-subtitle {
+        color: var(--dark-section-subtitle-color); /* Darker subtitle for white/light grey background */
+    }
+
+
+    #about {
+        background-color: whitesmoke; /* Keep these darker */
+        color: black; /* Original light text color */
+    }
+
+    .section-title {
+        font-weight: 700;
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        position: relative;
+        display: inline-block;
+    }
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 50%;
+        height: 3px;
+        background-color: var(--primary-color);
+    }
+    
+    .section-subtitle {
+        margin-bottom: 3rem;
+    }
+
+    /* --- Services Section --- */
+    .service-card {
+        background-color: var(--light-secondary-color); /* Cards remain dark */
+        padding: 2.5rem;
+        border-radius: var(--border-radius);
+        border: 1px solid #1d2d44;
+        transition: all 0.3s ease-in-out;
+        height: 100%;
+        color: var(--text-color); /* Ensure text is light on dark card */
+    }
+
+    .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7);
+        border-color: var(--primary-color);
+    }
+
+    .service-icon {
+        font-size: 3rem;
+        color: #fff; /* Icons on dark cards are white */
+        margin-bottom: 1.5rem;
+    }
+
+    .service-card h3 {
+        color: var(--text-color); /* Light heading on dark card */
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .service-card p {
+        color: var(--light-text-color); /* Light paragraph on dark card */
+    }
+
+    /* --- About Section --- */
+    .about-img {
+        border-radius: var(--border-radius);
+        box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7);
+    }
+
+    /* --- Why Choose Us Section --- */
+    .feature-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 2rem;
+    }
+    .feature-icon {
+        font-size: 1.5rem;
+        color: var(--primary-color); /* Icons on white background use primary color */
+        margin-right: 1.5rem;
+        margin-top: 5px;
+    }
+    .feature-item h4 {
+        font-weight: 600;
+        color: var(--dark-section-text-color); /* Dark heading for white background */
+    }
+    .feature-item p {
+        color: var(--dark-section-subtitle-color); /* Dark paragraph for white background */
+    }
+
+    /* --- Core Solutions Section --- */
+    .core-solution-item {
+        background-color: var(--light-secondary-color); /* Cards remain dark */
+        padding: 2rem;
+        border-radius: var(--border-radius);
+        text-align: center;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #1d2d44;
+        transition: all 0.3s ease;
+        color: var(--text-color); /* Light text for dark card */
+    }
+
+    .core-solution-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px -10px rgba(2,12,27,0.7);
+        border-color: var(--primary-color);
+    }
+
+    .core-solution-icon {
+        font-size: 2.5rem;
+        color: #fff; /* Icons on dark cards are white */
+        margin-bottom: 1rem;
+    }
+
+    .core-solution-item h4 {
+        font-weight: 600;
+        color: var(--text-color); /* Light heading for dark card */
+        margin-bottom: 0.75rem;
+    }
+
+    .core-solution-item p {
+        color: var(--light-text-color); /* Light paragraph for dark card */
+        font-size: 0.95rem;
+    }
+
+
+    /* --- Testimonials Section --- */
+    .testimonial-card {
+        background-color: var(--light-secondary-color);
+        padding: 2rem;
+        border-radius: var(--border-radius);
+        border-left: 5px solid var(--primary-color);
+    }
+    .testimonial-card p {
+        font-style: italic;
+        color: var(--light-text-color);
+    }
+    .testimonial-author {
+        margin-top: 1.5rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+    .testimonial-author span {
+        display: block;
+        font-size: 0.9rem;
+        font-weight: 400;
+        color: var(--primary-color);
+    }
+
+   
+    
+    /* Animation classes for content */
+    .content-fade-container {
+        position: relative;
+        /* Increased min-height significantly */
+        min-height: 400px; /* Increased to allow more room for content */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        /* Ensure overflow-y is auto if content might still exceed height */
+        overflow-y: auto; /* Allow vertical scrolling if content is too long */
+        overflow-x: hidden; /* Prevent horizontal scrolling */
+    }
+
+    .strategic-slide-content {
+        position: absolute;
+        width: 100%;
+        /* Set height to auto to allow content to dictate height */
+        height: auto; /* Let content define height */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 0 3rem; /* Match parent padding from strategic-content-wrapper */
+        transition: all 0.7s ease-in-out;
+        opacity: 0;
+        transform: translateY(20px); /* Default for fade-up */
+        /* Ensure inner content doesn't overflow */
+        box-sizing: border-box; /* Include padding in width/height calculation */
+    }
+
+    /* Specific animation classes */
+    .strategic-slide-content.animate-fade-up {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    .strategic-slide-content.animate-fade-left {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    .strategic-slide-content.animate-fade-down {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    .strategic-slide-content.animate-fade-right {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    .strategic-slide-content.active {
+        opacity: 1;
+        transform: translate(0, 0); /* Reset to normal position */
+    }
+
+    /* Dots indicator styling */
+    #strategic-focus .strategic-dots {
+        display: flex;
+        justify-content: center;
+        margin-top: 1.5rem;
+        gap: 10px;
+    }
+
+    #strategic-focus .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.2); /* Darker dots on light background */
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        border: 1px solid rgba(0, 170, 255, 0.5); /* Subtle border */
+    }
+
+    #strategic-focus .dot.active {
+        background-color: var(--primary-color);
+        transform: scale(1.2);
+        border-color: var(--primary-color);
+    }
+
+
+    /* --- Contact Section --- */
+    .contact-info-item {
+        background-color: var(--light-secondary-color); /* Cards remain dark */
+        padding: 2rem;
+        border-radius: var(--border-radius);
+        text-align: center;
+        margin-bottom: 1.5rem;
+        border: 1px solid #1d2d44;
+        color: var(--text-color); /* Light text for dark card */
+    }
+
+    .contact-info-item i {
+        font-size: 2.5rem;
+        color: #fff; /* Icons on dark cards are white */
+        margin-bottom: 1rem;
+    }
+
+    .contact-info-item h4 {
+        color: var(--text-color); /* Light heading for dark card */
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .contact-info-item p {
+        color: var(--light-text-color); /* Light paragraph for dark card */
+        font-size: 1.1rem;
+    }
+
+    .contact-info-item a {
+        color: var(--light-text-color); /* Light link for dark card */
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .contact-info-item a:hover {
+        color: var(--primary-color);
+    }
+
+    /* Adjust text color for general content in white/light grey sections */
+    #contact p.lead, #contact p.fs-5, #contact p.text-light-text-color {
+        color: var(--dark-section-subtitle-color) !important;
+    }
+    #contact a.text-white {
+        color: var(--dark-section-text-color) !important;
+    }
+    #contact a.text-white:hover {
+        color: var(--primary-color) !important;
+    }
+
+
+    /* --- Footer --- */
+    footer {
+        background-color: #0a192f;
+        padding: 3rem 0;
+        text-align: center;
+    }
+    footer a {
+        transition: color 0.3s ease;
+    }
+    footer a:hover {
+        color: var(--primary-color) !important; /* !important to override Bootstrap if necessary */
+    }
+    .footer-socials a {
+        color: #fff; /* Footer social icons are white */
+        font-size: 1.5rem;
+        margin: 0 0.8rem;
+        transition: transform 0.3s ease, color 0.3s ease; /* Add transition for hover */
+    }
+    .footer-socials a:hover {
+        transform: scale(1.1); /* Scale up on hover */
+        color: var(--primary-color) !important; /* Change color on hover */
+    }
+</style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="100">
+
+    <!-- Navigation Bar -->
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fa-solid fa-shield-halved"></i> Hanniel LLC
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                <i class="fa-solid fa-xmark close-icon"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Mobile Logo - This will only be visible when the navbar is expanded on mobile -->
+                <div class="d-lg-none text-center py-3 mb-3  border-primary">
+                    <a class="navbar-brand-mobile" href="#">
+                       <i class="fa-solid fa-shield-halved"></i> Hanniel LLC
+                    </a>
+                </div>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#hero">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="#core-solutions">Core Solutions</a>
+                    </li>
+                 
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="#why-us">Why Choose Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+                <a href="#contact" class="btn btn-cta ms-lg-3 d-none d-lg-block">Send Mail</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Carousel and Globe -->
+    <section id="hero" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+        <div id="globe-container"></div> <!-- Container for the Three.js globe -->
+
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#hero" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#hero" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#hero" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="carousel-caption">
+                    <div class="hero-content" data-aos="fade-up" data-aos-duration="1200" data-original-aos="fade-up">
+                        <h1>Fortifying Your Digital Frontier</h1>
+                        <p class="lead">Proactive, intelligent, and relentless cybersecurity solutions designed to protect your most valuable assets from evolving digital threats.</p>
+                        <a href="#services" class="btn btn-primary btn-lg mt-3">Explore Our Defenses</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="carousel-caption">
+                    <div class="hero-content" data-aos="fade-right" data-aos-duration="1200" data-original-aos="fade-right">
+                        <h1>Intelligent Threat Detection</h1>
+                        <p class="lead">Harnessing AI and machine learning to identify and neutralize advanced persistent threats before they can cause harm.</p>
+                        <a href="#services" class="btn btn-primary btn-lg mt-3">Learn About Our AI</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="carousel-caption">
+                    <div class="hero-content" data-aos="fade-left" data-aos-duration="1200" data-original-aos="fade-left">
+                        <h1>Secure Your Cloud Journey</h1>
+                        <p class="lead">Expert cloud security strategies and implementation for AWS, Azure, and GCP, ensuring your data is safe everywhere.</p>
+                        <a href="#services" class="btn btn-primary btn-lg mt-3">Cloud Solutions</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- About Us Section -->
+    <section id="about" class="section" style="background-color: white;">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1000">
+                    <img src="./WhatsApp Image 2025-07-08 at 04.05.47_e8c33f43.jpg" class="img-fluid about-img" alt="Hanniel LLC Team">
+                </div>
+                <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1000">
+                    <h2 class="section-title">Pioneers in Digital Defense</h2>
+                    <p class="text-primary fw-bold">We are a team of elite cybersecurity experts, intelligence analysts, and dedicated engineers.</p>
+                    <p class="text-light-text-color">Founded on the principle that true security requires a proactive and adaptive approach, Hanniel LLC has been at the forefront of digital protection for over a decade. We combine cutting-edge technology with deep human expertise to deliver security solutions that are not just robust, but also intelligent and tailored to your unique operational landscape.</p>
+            
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Services Section -->
+    <section id="services" class="section" style="background-color: #0a192f">
+        <div class="container">
+            <div class="text-center" data-aos="fade-down">
+                <h2 class="section-title text-white">Our Security Services</h2>
+                <p class="section-subtitle text-light">Comprehensive protection for every layer of your organization.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in-up" data-aos-delay="100">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fa-solid fa-shield-virus"></i></div>
+                        <h3>Threat Intelligence</h3>
+                        <p>Leverage our proactive threat hunting and intelligence platform to identify and mitigate risks before they impact your business.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fa-solid fa-user-secret"></i></div>
+                        <h3>Penetration Testing</h3>
+                        <p>Our ethical hackers simulate real-world attacks to uncover vulnerabilities in your networks, applications, and infrastructure.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in-up" data-aos-delay="300">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fa-solid fa-headset"></i></div>
+                        <h3>24/7 Managed SOC</h3>
+                        <p>Round-the-clock monitoring, detection, and response from our formidable team.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fa-solid fa-cloud-shield"></i></div>
+                        <h3>Cloud Security</h3>
+                        <p>Secure your cloud environments (AWS, Azure, GCP) with our expert configuration, monitoring, and compliance services.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in-up" data-aos-delay="500">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fa-solid fa-file-contract"></i></div>
+                        <h3>Compliance & Governance</h3>
+                        <p>Navigate complex regulatory landscapes like GDPR, HIPAA, and PCI-DSS with our strategic advisory and audit services.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fa-solid fa-person-chalkboard"></i></div>
+                        <h3>Security Awareness Training</h3>
+                        <p>Empower your employees to be your first line of defense with engaging and effective cybersecurity awareness programs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Core Solutions Section -->
+    <section id="core-solutions" class="section">
+        <div class="container">
+            <div class="text-center" data-aos="fade-up">
+                <h2 class="section-title">Our Core Solutions</h2>
+                <p class="section-subtitle">Specialized expertise to address your critical security needs.</p>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-3 col-md-6" data-aos="flip-up" data-aos-delay="100">
+                    <div class="core-solution-item">
+                        <div class="core-solution-icon"><i class="fa-solid fa-lock-open"></i></div>
+                        <h4>Application Security</h4>
+                        <p>Secure your applications from code to cloud with integrated tools and best practices.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="flip-up" data-aos-delay="250">
+                    <div class="core-solution-item">
+                        <div class="core-solution-icon"><i class="fa-solid fa-cloud"></i></div>
+                        <h4>Cloud Security</h4>
+                        <p>Comprehensive protection for AWS, Azure, and hybrid cloud infrastructures.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="flip-up" data-aos-delay="400">
+                    <div class="core-solution-item">
+                        <div class="core-solution-icon"><i class="fa-solid fa-brain"></i></div>
+                        <h4>Security Consulting</h4>
+                        <p>Strategic advisory services to align cybersecurity with your business goals.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="flip-up" data-aos-delay="550">
+                    <div class="core-solution-item">
+                        <div class="core-solution-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                        <h4>Vulnerability Assessments</h4>
+                        <p>Proactive scanning, reporting, and mitigation to reduce your attack surface.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Why Choose Us Section -->
+    <section id="why-us" class="section">
+        <div class="container">
+            <div class="text-center" data-aos="fade-up">
+                <h2 class="section-title">The Hanniel LLC Advantage</h2>
+                <p class="section-subtitle">We don't just sell security; we deliver cyber resilience.</p>
+            </div>
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6" data-aos="slide-right" data-aos-duration="1000">
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fa-solid fa-brain"></i></div>
+                        <div>
+                            <h4>Proactive Intelligence</h4>
+                            <p>We hunt for threats before they find you. Our intelligence-driven approach means we're always several steps ahead of attackers.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fa-solid fa-users"></i></div>
+                        <div>
+                            <h4>Partners in Security</h4>
+                            <p>We integrate seamlessly with your team, acting as an extension of your own capabilities to build a strong, collaborative security culture.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fa-solid fa-chart-line"></i></div>
+                        <div>
+                            <h4>Measurable Results</h4>
+                            <p>We provide clear, actionable insights and reporting, demonstrating tangible improvements in your security posture and ROI.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="slide-left" data-aos-duration="1000">
+                    <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=1887&auto=format&fit=crop" class="img-fluid about-img" alt="Strategic Meeting">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section">
+        <div class="container">
+            <div class="text-center" data-aos="fade-down">
+                <h2 class="section-title">Trusted by Industry Leaders</h2>
+                <p class="section-subtitle">Hear what our clients have to say about our partnership.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-card">
+                        <p>"Hanniel LLC's managed SOC has been a game-changer for us. Their team is incredibly responsive and their expertise has given us a level of security we couldn't achieve on our own. I can finally sleep at night."</p>
+                        <div class="testimonial-author">
+                            Jane Doe
+                          
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-card">
+                        <p>"The penetration test they conducted was thorough and eye-opening. They didn't just give us a list of problems; they provided a clear roadmap for remediation and worked with our dev team to fix the critical issues."</p>
+                        <div class="testimonial-author">
+                            John Smith
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Contact -->
+         <section id="contact" class="section">
+        <div class="container">
+            <div class="text-center" data-aos="fade-up">
+                <h2 class="section-title">Connect with us</h2>
+                <p class="section-subtitle">Let's discuss how we can tailor a security strategy for you. Reach out for a confidential consultation.</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center" data-aos="fade-up" data-aos-delay="100">
+                    <p class="lead text-black-text-color mb-4">
+                        Ready to enhance your cybersecurity posture? We're here to help.
+                    </p>
+                  
+                    <a href="mailto:info@hanniels.com?subject=Inquiry%20from%20Website" class="btn btn-primary btn-lg">
+                        <i class="fa-solid fa-envelope me-2"></i> Send Us an Email
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row g-4 text-start">
+                <div class="col-md-4" data-aos="fade-right">
+                    <h5 class="text-white mb-3">Hanniel LLC</h5>
+                    <p class="text-light-text-color">Dedicated to fortifying your digital presence with cutting-edge cybersecurity solutions and unwavering expertise.</p>
+                </div>
+                <div class="col-md-2" data-aos="fade-up" data-aos-delay="100">
+                    <h5 class="text-white mb-3">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#hero" class="text-light-text-color text-decoration-none py-1 d-block">Home</a></li>
+                        <li><a href="#about" class="text-light-text-color text-decoration-none py-1 d-block">About Us</a></li>
+                        <li><a href="#services" class="text-light-text-color text-decoration-none py-1 d-block">Services</a></li>
+                        <li><a href="#core-solutions" class="text-light-text-color text-decoration-none py-1 d-block">Core Solutions</a></li>
+                  
+                        <li><a href="#why-us" class="text-light-text-color text-decoration-none py-1 d-block">Why choose us</a></li>
+                        <li><a href="#contact" class="text-light-text-color text-decoration-none py-1 d-block">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+                    <h5 class="text-white mb-3">Contact Us</h5>
+                    <p class="text-light-text-color mb-1"><i class="fas fa-map-marker-alt me-2"></i>    Gen. Lafayette Blvd Brandywine</p>
+                  
+                    <p class="text-light-text-color mb-1"><i class="fas fa-envelope me-2"></i> <a href="mailto:info@hannielsllc.com" class="text-light-text-color text-decoration-none">info@hanniels.com</a></p>
+                </div>
+                <div class="col-md-3" data-aos="fade-left" data-aos-delay="300">
+                    <h5 class="text-white mb-3">Follow Us</h5>
+                    <div class="footer-socials">
+                        <a href="#" class="me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="me-3"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="me-3"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="text-light-text-color my-4">
+            <p class="text-light-text-color text-center mb-0">&copy; 2025 Hanniel LLC. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize AOS (Animate on Scroll)
+            AOS.init({
+                duration: 1000,
+                once: false, // Set to false to allow repeated animations
+                easing: 'ease-in-out',
+            });
+
+            // --- Navbar Logic ---
+            const navbar = document.getElementById('navbar');
+            const navLinks = document.querySelectorAll('#navbarNav .nav-link');
+            const navbarCollapse = document.getElementById('navbarNav');
+            const bsCollapse = new bootstrap.Collapse(navbarCollapse, { toggle: false });
+            const mobileNavbarToggler = document.querySelector('.navbar-toggler');
+            
+            // Function to handle active link state on click and close mobile menu
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.forEach(navLink => navLink.classList.remove('active'));
+                    link.classList.add('active');
+                    if (navbarCollapse.classList.contains('show')) {
+                        bsCollapse.hide();
+                    }
+                });
+            });
+
+            // --- Custom Mobile Menu Overlay and Toggler Icon Transformation ---
+            let overlay = null;
+            
+            mobileNavbarToggler.addEventListener('click', () => {
+                bsCollapse.toggle();
+            });
+
+            navbarCollapse.addEventListener('show.bs.collapse', () => {
+                if (!overlay) {
+                    overlay = document.createElement('div');
+                    overlay.className = 'navbar-overlay';
+                    document.body.appendChild(overlay);
+                    overlay.addEventListener('click', () => bsCollapse.hide());
+                }
+                setTimeout(() => overlay.classList.add('show'), 10);
+            });
+
+            navbarCollapse.addEventListener('hide.bs.collapse', () => {
+                if (overlay) {
+                    overlay.classList.remove('show');
+                    setTimeout(() => {
+                        if (overlay && overlay.parentNode) {
+                           overlay.parentNode.removeChild(overlay);
+                        }
+                        overlay = null;
+                    }, 300);
+                }
+            });
+
+            // Navbar scroll background effect
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // --- Three.js Globe for Hero Section ---
+            const globeContainer = document.getElementById('globe-container');
+            if (globeContainer) {
+                let scene, camera, renderer, globe;
+
+                function initGlobe() {
+                    // Scene
+                    scene = new THREE.Scene();
+
+                    // Camera
+                    camera = new THREE.PerspectiveCamera(75, globeContainer.clientWidth / globeContainer.clientHeight, 0.1, 1000);
+                    camera.position.z = 2;
+
+                    // Renderer
+                    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+                    renderer.setSize(globeContainer.clientWidth, globeContainer.clientHeight);
+                    globeContainer.appendChild(renderer.domElement);
+
+                    // Globe (Sphere Geometry)
+                    const geometry = new THREE.SphereGeometry(1, 32, 32);
+                    const material = new THREE.MeshBasicMaterial({ 
+                        color: 0x00aaff, // Primary color from CSS
+                        wireframe: true,
+                        transparent: true,
+                        opacity: 0.2 // Make it translucent
+                    });
+                    globe = new THREE.Mesh(geometry, material);
+                    scene.add(globe);
+
+                    // Resize handler
+                    window.addEventListener('resize', onWindowResize);
+                }
+
+                function onWindowResize() {
+                    camera.aspect = globeContainer.clientWidth / globeContainer.clientHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(globeContainer.clientWidth, globeContainer.clientHeight);
+                }
+
+                function animateGlobe() {
+                    requestAnimationFrame(animateGlobe);
+
+                    if (globe) {
+                        globe.rotation.y += 0.002; // Rotate slowly
+                    }
+
+                    renderer.render(scene, camera);
+                }
+
+                initGlobe();
+                animateGlobe();
+            }
+
+            // --- Custom Carousel "Zoom-Out-Fade" Animation Logic ---
+            const heroCarouselElement = document.getElementById('hero');
+            if (heroCarouselElement) {
+                const carousel = new bootstrap.Carousel(heroCarouselElement, {
+                    interval: 5000, 
+                    ride: 'carousel',
+                    wrap: true 
+                });
+
+                heroCarouselElement.addEventListener('slide.bs.carousel', function (e) {
+                    const activeItem = this.querySelector('.carousel-item.active');
+                    const nextItem = e.relatedTarget;
+
+                    // Remove AOS animate class from the outgoing content
+                    if (activeItem) {
+                        const activeContent = activeItem.querySelector('.hero-content');
+                        if (activeContent) {
+                            activeContent.classList.remove('aos-animate');
+                        }
+                    }
+
+                    // Set outgoing slide's animation
+                    if (activeItem) {
+                        activeItem.style.transform = 'scale(0.9)'; // Zoom out
+                        activeItem.style.opacity = 0;
+                        activeItem.style.zIndex = 1; // Send to back
+                    }
+                    
+                    // Set incoming slide's initial state
+                    nextItem.style.transform = 'scale(0.9)'; // Start zoomed out
+                    nextItem.style.opacity = 0;
+                    nextItem.style.zIndex = 2; // Bring to front
+
+                    // Animate incoming slide after a very short delay to ensure initial state is registered
+                    setTimeout(() => {
+                        nextItem.style.opacity = 1;
+                        nextItem.style.transform = 'scale(1)'; // Zoom in to normal size
+                    }, 50); 
+                });
+
+                heroCarouselElement.addEventListener('slid.bs.carousel', function (e) {
+                    // This event fires *after* the slide transition completes
+                    const newActiveItem = e.target.querySelector('.carousel-item.active');
+                    const newActiveContent = newActiveItem.querySelector('.hero-content');
+
+                    if (newActiveContent) {
+                        // Re-add the AOS animate class to trigger the animation again
+                        newActiveContent.classList.add('aos-animate');
+                        // No need for AOS.refresh() if `once: false` is set and classes are managed.
+                        // AOS.refresh() can be heavy if called frequently.
+                    }
+
+                    // Reset transition properties for all items to prepare for the *next* transition
+                    e.target.querySelectorAll('.carousel-item').forEach(item => {
+                        if (!item.classList.contains('active')) {
+                            item.style.transition = 'none'; // Remove transition for inactive items
+                            item.style.opacity = 0;
+                            item.style.transform = 'scale(0.9)'; // Reset transform for next entry
+                            // Also ensure their content is ready for next animation
+                            const content = item.querySelector('.hero-content');
+                            if (content) {
+                                content.classList.remove('aos-animate');
+                            }
+                        } else {
+                            // Re-apply transition for the currently active item
+                            item.style.transition = 'opacity 1.2s ease-in-out, transform 1.2s ease-in-out';
+                        }
+                    });
+                });
+            }
+
+            // --- Our Strategic Focus Section Logic (NEW) ---
+            const focusContentData = [
+                {
+                    icon: 'fa-solid fa-magnifying-glass',
+                    title: 'Proactive Threat Hunting',
+                    description: 'Our elite threat hunters actively search for advanced persistent threats within your environment, leveraging cutting-edge intelligence and behavioral analytics to neutralize risks before they escalate.',
+                    animationClass: 'animate-fade-up'
+                },
+                {
+                    icon: 'fa-solid fa-robot',
+                    title: 'AI-Powered Security Operations',
+                    description: 'We integrate AI and machine learning into our SOC services, automating threat analysis, accelerating incident response, and providing predictive insights to fortify your digital infrastructure.',
+                    animationClass: 'animate-fade-left'
+                },
+                {
+                    icon: 'fa-solid fa-cloud',
+                    title: 'Resilient Cloud Security Frameworks',
+                    description: 'From architecture review to continuous monitoring, we ensure your cloud deployments on AWS, Azure, or GCP are not just compliant, but inherently secure against evolving cloud-native threats.',
+                    animationClass: 'animate-fade-down'
+                },
+                {
+                    icon: 'fa-solid fa-people-group',
+                    title: 'Human-Centric Security Culture',
+                    description: 'Cybersecurity is a collective responsibility. Our tailored training programs and awareness campaigns transform your employees into a vigilant first line of defense, reducing human-centric risks.',
+                    animationClass: 'animate-fade-right'
+                }
+            ];
+
+            let currentFocusIndex = 0;
+            let autoPlayInterval;
+            const autoPlayDuration = 7000; // 7 seconds per slide
+
+            const focusContentElement = document.getElementById('focusContent');
+            const prevFocusBtn = document.getElementById('prevFocus');
+            const nextFocusBtn = document.getElementById('nextFocus');
+            const strategicDotsContainer = document.getElementById('strategic-dots');
+            const strategicFocusSection = document.getElementById('strategic-focus');
+
+            // Function to create dots
+            function createDots() {
+                strategicDotsContainer.innerHTML = ''; // Clear existing dots
+                focusContentData.forEach((_, index) => {
+                    const dot = document.createElement('div');
+                    dot.classList.add('dot');
+                    if (index === currentFocusIndex) {
+                        dot.classList.add('active');
+                    }
+                    dot.addEventListener('click', () => {
+                        stopAutoPlay();
+                        renderFocusContent(index);
+                        setTimeout(startAutoPlay, autoPlayDuration * 0.5);
+                    });
+                    strategicDotsContainer.appendChild(dot);
+                });
+            }
+
+            function updateDots() {
+                document.querySelectorAll('#strategic-dots .dot').forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentFocusIndex);
+                });
+            }
+
+            function renderFocusContent(index) {
+                const oldContentDiv = focusContentElement.querySelector('.strategic-slide-content.active');
+                if (oldContentDiv) {
+                    oldContentDiv.classList.remove('active');
+                    // Add an exit animation class if desired, then remove. For now, just hide.
+                    setTimeout(() => oldContentDiv.remove(), 700); // Wait for transition
+                }
+
+                const focus = focusContentData[index];
+                const newContentDiv = document.createElement('div');
+                newContentDiv.classList.add('strategic-slide-content', focus.animationClass);
+                newContentDiv.innerHTML = `
+                    <i class="${focus.icon} strategic-icon"></i>
+                    <h3 class="current-focus-title">${focus.title}</h3>
+                    <p class="current-focus-description">${focus.description}</p>
+                `;
+                focusContentElement.appendChild(newContentDiv);
+
+                // Force reflow to apply initial state before transitioning
+                void newContentDiv.offsetWidth; 
+                newContentDiv.classList.add('active');
+
+                currentFocusIndex = index;
+                updateDots();
+            }
+
+            function showNextFocus() {
+                currentFocusIndex = (currentFocusIndex + 1) % focusContentData.length;
+                renderFocusContent(currentFocusIndex);
+            }
+
+            function showPrevFocus() {
+                currentFocusIndex = (currentFocusIndex - 1 + focusContentData.length) % focusContentData.length;
+                renderFocusContent(currentFocusIndex);
+            }
+
+            function startAutoPlay() {
+                stopAutoPlay(); // Clear existing interval
+                autoPlayInterval = setInterval(showNextFocus, autoPlayDuration);
+            }
+
+            function stopAutoPlay() {
+                if (autoPlayInterval) {
+                    clearInterval(autoPlayInterval);
+                }
+            }
+
+            // Event listeners for navigation buttons
+            if (prevFocusBtn && nextFocusBtn) {
+                prevFocusBtn.addEventListener('click', () => {
+                    stopAutoPlay();
+                    showPrevFocus();
+                    setTimeout(startAutoPlay, autoPlayDuration * 0.5); // Restart after a delay
+                });
+                nextFocusBtn.addEventListener('click', () => {
+                    stopAutoPlay();
+                    showNextFocus();
+                    setTimeout(startAutoPlay, autoPlayDuration * 0.5); // Restart after a delay
+                });
+            }
+
+            // Observe the section to start/stop auto-play
+            const focusObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        startAutoPlay();
+                    } else {
+                        stopAutoPlay();
+                    }
+                });
+            }, { threshold: 0.5 }); // Trigger when 50% of the section is visible
+
+            if (strategicFocusSection) {
+                focusObserver.observe(strategicFocusSection);
+            }
+            
+            // Initial render when the page loads
+            createDots(); // Create dots on load
+            renderFocusContent(currentFocusIndex);
+
+            // --- Contact Email Button Logic ---
+            const emailButton = document.getElementById('emailButton');
+            if (emailButton) {
+                emailButton.addEventListener('click', () => {
+                    window.location.href = 'mailto:donaldayodeji6@gmail.com';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
